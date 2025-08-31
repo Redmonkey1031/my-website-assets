@@ -1,0 +1,504 @@
+/* 基本樣式重設與設定 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  min-height: 100vh;
+  margin: 0;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1744624572344-7066f06ccfb9?q=80&w=3862');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(2px);
+  z-index: -1;
+  transform: scale(1.5);
+}
+
+
+/* 頂部視差區塊 */
+.hero-section {
+  height: 85vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 70%);
+}
+
+/* hero 背景圖片（由 <img> 控制） */
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  z-index: -1;
+}
+
+/* hero 內容 */
+.hero-content {
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  top: -100px;
+  color: white;
+}
+
+.hero-content h1 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+
+/* 新增的視差分隔區塊 */
+.parallax-divider {
+  height: 50vh; /* 設定此區塊的高度 */
+  position: relative;
+  overflow: hidden;
+  /* 使用與 hero-section 相同的 clip-path 來創造傾斜效果 */
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 70%);
+}
+
+/* 新增的視差分隔區塊的背景圖 */
+.parallax-divider-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  /* 您可以為這個背景圖也加上響應式縮放效果 */
+  transition: transform 0.3s ease;
+}
+
+/* 調整攝影作品集區塊的位置 */
+.gallery-section {
+  padding: 4rem 1rem 1rem 1rem; /* 增加頂部 padding，避免內容太靠近邊緣 */
+  /* max-width: 1600px; */
+  margin: 0 auto;
+  position: relative; /* 必須設定 position 才能使用 z-index */
+  z-index: 1; /* 確保此區塊疊在 parallax-divider 之上 */
+  margin-top: -10vh; /* 將此區塊往上拉，與 parallax-divider 的斜邊重疊 */
+}
+  
+
+/* 黑色資訊區塊 */
+.info-section {
+  color: white;
+  padding: 4rem 1rem 3rem 1rem;
+  text-align: center;
+  margin-top: -15vh;
+  position: relative;
+  z-index: 1;
+}
+
+.info-content h2 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.info-content p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  max-width: 400px;
+  margin: 0 auto;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+img {
+  -webkit-user-drag: none; /* Chrome, Safari */
+  pointer-events: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/*
+ * 整個連結的基礎樣式 (包含符號和文字)
+ */
+.contact-title-link {
+  color: inherit;
+  text-decoration: none; /* 關鍵：移除<a>標籤自身的底線 */
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/*
+ * 只針對需要底線的文字部分 (<span>) 加上底線
+ */
+.contact-title-link .underlined-text {
+  /* 1. 關閉原本的 text-decoration */
+  text-decoration: none;
+
+  /* 2. 加上下邊框來當作底線 */
+  border-bottom: 2px solid; /* 2px 是粗細, solid 是實線。顏色會自動繼承文字顏色 */
+
+  /* 3. 用 padding-bottom 推出想要的距離 */
+  padding-bottom: 2px; /* 調整這個數值來改變距離 */
+}
+
+/*
+ * 當滑鼠懸停在整個連結上時的效果
+ */
+.contact-title-link:hover {
+  color: #007bff;
+  transform: translateY(-4px);
+}
+
+/* --- 價格說明區塊樣式 --- */
+.pricing-section {
+  color: white;
+  padding: 1rem 1rem 4rem 1rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin-top: -2rem;
+}
+
+.pricing-section h2 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 價格卡片樣式 */
+.pricing-card {
+  background-color: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 確保卡片填滿 slide 高度 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 卡片內容樣式 */
+.pricing-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #f0f0f0;
+}
+.pricing-card h4 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+.pricing-card ul {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+.pricing-card ul li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #dcdcdc;
+}
+.pricing-card ul li::before {
+  content: '✓';
+  color: #4CAF50;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+.cta-button {
+  background-color: #333;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.cta-button:hover {
+  background-color: white;
+  color: black;
+}
+
+/* ▼▼▼ 核心修改部分 ▼▼▼ */
+
+/* --- 桌面版樣式 (螢幕寬度 > 768px) --- */
+@media (min-width: 769px) {
+  .swiper-wrapper {
+    /* 在桌面版，我們讓 wrapper 像 flex 容器一樣排列 */
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .swiper-slide {
+    /* 設定每個 slide 的寬度 */
+    width: 320px !important; /* 使用 !important 覆蓋 Swiper 的內聯樣式 */
+    flex-shrink: 0;
+  }
+}
+
+/* --- 手機版樣式 (螢幕寬度 <= 768px) --- */
+@media (max-width: 768px) {
+  .pricing-slider {
+    width: 100%;
+    max-width: 400px; /* 限制輪播最大寬度，避免在平板上過寬 */
+    margin: 0 auto;
+    overflow: hidden; /* 隱藏超出範圍的 slides */
+    padding-bottom: 30px; /* 為下方的分頁器留出空間 */
+  }
+  
+  .pricing-slider .swiper-slide {
+      /* 在手機上，讓卡片稍微小一點，左右留出空隙，更有輪播的感覺 */
+      width: 85%;
+  }
+
+  /* Swiper 分頁器 (小圓點) 樣式 */
+  .swiper-pagination-bullet {
+    background-color: #aaa;
+    opacity: 0.7;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #ffffff;
+    opacity: 1;
+  }
+}
+
+/* 攝影作品集 */
+.gallery-section {
+  padding: 1rem 1rem;
+  /* max-width: 1600px; */
+  margin: 0 auto;
+}
+
+.gallery-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-grid {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.gallery-item {
+  width: 50%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  overflow: hidden;
+}
+
+.gallery-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.03);
+}
+
+.lightbox {
+  /* 預設隱藏 */
+  display: none; 
+  /* 固定位置，覆蓋整個畫面 */
+  position: fixed;
+  z-index: 999; /* 確保在最上層 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 50% 不透明度的黑色背景 */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* 使用 Flexbox 讓內容（圖片）垂直和水平置中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* 為了搭配 JS 的顯示/隱藏，我們改用 opacity 和 visibility 來控制，以實現淡入淡出效果 */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* 當 Lightbox 顯示時的樣式 */
+.lightbox.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 放大的圖片內容 */
+.lightbox-content {
+  max-width: 90%;  /* 最大寬度不超過畫面的 90% */
+  max-height: 85%; /* 最大高度不超過畫面的 85% */
+  object-fit: contain; /* 保持圖片比例 */
+  /* 點擊圖片時不會觸發關閉背景的事件 */
+  pointer-events: auto; 
+  /* 漂亮的縮放動畫 */
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.lightbox.show .lightbox-content {
+    transform: scale(1);
+}
+
+
+/* 關閉按鈕 */
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.lightbox-close:hover {
+  color: #ccc;
+}
+
+/* 響應式設計：平板 */
+@media (max-width: 992px) {
+  .gallery-item {
+    width: calc(100%);
+  }
+
+  .hero-bg {
+    object-position: center 100%;
+    content: url('https://redmonkey31.vercel.app/cinematic/hero/106/IMG_2065%282.35-1%29.webp');
+    /* transform: scale(1.35);  ✅ 圖片放大 */
+    transform-origin: center center;
+  }
+}
+
+/* 響應式設計：手機 */
+@media (max-width: 576px) {
+  .gallery-item {
+    width: calc(100%);
+  }
+
+  .hero-bg {
+    object-position: center 100%;
+    content: url('https://redmonkey31.vercel.app/cinematic/hero/106/IMG_2065%282.35-1%29.webp');
+    /* transform: scale(1.35); /* ✅ 圖片放大 */
+    transform-origin: center center;
+  }
+}
+
+/* 小螢幕文字調整 */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .info-content h2 {
+    font-size: 1.5rem;
+  }
+
+  /* 可選：調整 clip-path 角度與 info-section 的 margin-top */
+  /* .hero-section { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%); } */
+  /* .info-section { margin-top: -8vh; } */
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  z-index: 1000;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#back-to-top:hover {
+  background-color: #555;
+}
