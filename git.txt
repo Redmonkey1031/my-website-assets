@@ -1,0 +1,42 @@
+git pull origin main --rebase	# 先看有拉下檔案
+
+git clone -b main https://github.com/Redmonkey1031/Portfolio.git # 拉下分支全部檔案
+
+# <資料夾名稱> 請換成你 add 進去的那個資料夾的名稱
+git restore --staged <資料夾名稱>/
+
+git status  # 先看有哪些檔案有衝突（可選）
+
+# 用這行命令，強制每個衝突檔案保留本地版本：
+git checkout --ours .
+
+git init
+# 把所有檔案標記為已解決
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/Redmonkey1031/Portfolio
+git push -u origin main
+
+# 完成後你就可以
+git push origin main
+
+# 修改完成後取消 rebase
+git rebase --continuein
+
+
+
+:: 1.# 刪除暫存區內容
+git rm --cached -r .
+
+:: 2. 將所有變更加入暫存
+git add .
+
+:: 3. 提交變更
+git commit -m "test"
+
+:: 4.
+git branch -M main
+
+:: 5. 強制推送 (請將 main 換成您的分支名稱)
+git push --force origin main
