@@ -1,0 +1,36 @@
+name: Sync ALL folder to Cloudflare R2
+
+on:
+  push:
+    branches:
+      - main  # 你可以改成其他分支名稱
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install rclone
+        run: sudo apt-get install -y rclone
+
+      - name: Configure rclone
+        run: |
+          echo "[r2]" > ~/.rclone.conf
+          echo "type = s3" >> ~/.rclone.conf
+          echo "provider = Cloudflare" >> ~/.rclone.conf
+          echo "access_key_id = ${{ secrets.R2_ACCESS_KEY_ID }}" >> ~/.rclone.conf
+          echo "secret_access_key = ${{ secrets.R2_SECRET_ACCESS_KEY }}" >> ~/.rclone.conf
+          echo "endpoint = https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com" >> ~/.rclone.conf
+
+      - name: Sync ALL folder to Cloudflare R2 (auto-delete old files)
+        run: |
+          rclone sync ./public/ALL r2:${{ secrets.R2_BUCKET_NAME }}/ALL \
+            --progress \
+            --delete-during \
+            --fast-list \
+            --checksum \
+            --transfers=8 \
+            --checkers=16
