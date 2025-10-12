@@ -3,21 +3,13 @@ name: Sync ALL folder to Cloudflare R2
 on:
   push:
     branches:
-      - main
+      - main  # 你可以改成其他分支名稱
 
 jobs:
   upload:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Free up disk space on GitHub runner
-        run: |
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          echo "💾 Cleaned up disk space."
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -40,7 +32,5 @@ jobs:
             --delete-during \
             --fast-list \
             --checksum \
-            --transfers=4 \
-            --checkers=8 \
-            --low-level-retries=3 \
-            --retries=3
+            --transfers=8 \
+            --checkers=16
